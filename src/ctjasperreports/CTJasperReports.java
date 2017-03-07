@@ -7,6 +7,7 @@ package ctjasperreports;
 
 import java.util.Properties;
 import java.io.FileReader;
+import java.io.FileInputStream;
 import java.util.Map;
 import java.util.HashMap;
 /**
@@ -23,15 +24,21 @@ public class CTJasperReports {
 
     public static void main(String[] args) throws Exception {
         if (args.length > 1){
-            System.out.println("Hay demasiados parámetros. Debe escribir: CTJasperReports path\\archivodeconfiguracion");
+            System.out.println("Hay demasiados parámetros. Debe escribir: CTJasperReports path\\archivodeconfiguracion.xml");
         }
         // TODO code application logic here        
-        try (FileReader reader = new FileReader("D:\\Users\\desarrollo1\\Documents\\NetBeansProjects\\CTJasperReports\\src\\ctjasperreports\\App.config.properties")) {
-            //Properties appConf = new Properties();
-            appConf.load(reader);
-
+//        try (FileReader reader = new FileReader("D:\\Users\\desarrollo1\\Documents\\NetBeansProjects\\CTJasperReports\\src\\ctjasperreports\\App.config.properties")) {
+//            //Properties appConf = new Properties();
+//            appConf.load(reader);
+//        } catch (Exception e) {
+//            ;
+//            e.printStackTrace();
+//        }
+        
+        try (FileInputStream fil = new FileInputStream("D:\\Users\\desarrollo1\\Documents\\NetBeansProjects\\JasperReports\\src\\ctjasperreports\\App.config.properties.xml"))
+        {
+            appConf.loadFromXML(fil);
         } catch (Exception e) {
-            ;
             e.printStackTrace();
         }
         
