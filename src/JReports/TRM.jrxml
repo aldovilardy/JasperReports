@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TRM" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="53" bottomMargin="40">
+	<queryString>
+		<![CDATA[SELECT TRM.VALORESDIV AS "TRM",
+            COMPRA.VALORESDIV AS "TRM COMPRA",
+            VENTA.VALORESDIV AS "TRM VENTA",
+            TRM.VIGENCIAINI,
+            TRM.VIGENCIAFIN
+FROM IVR_SK.V_P_IVR_DATOS TRM,
+         IVR_SK.V_P_IVR_DATOS COMPRA,
+         IVR_SK.V_P_IVR_DATOS VENTA
+WHERE TRM.ORDEN = 0 AND
+           COMPRA.ORDEN = 1 AND
+           VENTA.ORDEN = 2]]>
+	</queryString>
+	<field name="TRM" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TRM COMPRA" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TRM VENTA" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VIGENCIAINI" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VIGENCIAFIN" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="99">
+			<image>
+				<reportElement x="1" y="38" width="552" height="61"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Fax\\jasper\\logobanco.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="0" width="486" height="26"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Este fax fue producido el día                                                  a la(s)                                 por solicitud de un usuario del sistema de audio respuesta del Banco de la República para indicadores económicos, es de caracter informativo.]]></text>
+			</staticText>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="290" y="0" width="100" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+				<reportElement x="118" y="0" width="160" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="132">
+			<staticText>
+				<reportElement x="0" y="53" width="425" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tasa de cambio representativa del mercado ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="73" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRM]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="152">
+			<rectangle>
+				<reportElement x="214" y="74" width="108" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="108" y="74" width="106" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="74" width="108" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="214" y="75" width="108" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Promedio ponderado de venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="75" width="106" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="75" width="108" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Promedio ponderado de compra]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="104" width="108" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="108" y="104" width="106" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="214" y="104" width="108" height="20"/>
+			</rectangle>
+			<textField pattern="$#,##0.00">
+				<reportElement x="214" y="105" width="108" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TRM VENTA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="108" y="105" width="106" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TRM COMPRA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="-1" y="105" width="108" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TRM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="15" width="408" height="20"/>
+				<textElement/>
+				<text><![CDATA[ La tasa representativa del mercado para el día                                                      es:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+				<reportElement x="214" y="15" width="151" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{VIGENCIAINI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="138" width="41" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fuente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="138" width="259" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Superintendencia Financiera de Colombia (www.superfinanciera.gov.co)]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="99">
+			<staticText>
+				<reportElement x="-57" y="27" width="422" height="14"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-58" y="75" width="545" height="24"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[El que ilícitamente sustraiga, oculte, extravíe, destruya, intercepte, controle o impida esta comunicación antes de que llegue a su destinatario, estará sujeto a las sanciones penales correspondientes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-57" y="27" width="545" height="27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[         Nos permitimos informar que en el vinculo http://www.banrep.org/es/series-estadisticas/see_ts_trm.htm puede consultar la información relacionada.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

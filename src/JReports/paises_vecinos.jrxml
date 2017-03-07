@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monedas_reserva" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="53" bottomMargin="40">
+	<queryString>
+		<![CDATA[SELECT DESCRIPCION,
+      VIGENCIAINI,
+     AVG(DECODE(COLUMNA,'DOLARES COMPRA',VALOR)) "dolares compra",
+     AVG(DECODE(COLUMNA,'DOLARES VENTA',VALOR)) "dolares venta",
+     AVG(DECODE(COLUMNA,'DOLARES MEDIA',VALOR)) "dolares media",
+     AVG(DECODE(COLUMNA,'PESOS COMPRA',VALOR)) "peso compra",
+     AVG(DECODE(COLUMNA,'PESOS VENTA',VALOR)) "peso venta",
+     AVG(DECODE(COLUMNA,'PESOS MEDIA',VALOR)) "peso media"
+FROM (select DESCRIPCION, TASAS_ID,DECODE(TIPO_ID||CLASE_ID,'22','DOLARES COMPRA','21','DOLARES VENTA','23','DOLARES MEDIA',
+    '32','PESOS COMPRA','31','PESOS VENTA','33','PESOS MEDIA') "COLUMNA", VALORESDIV VALOR,VIGENCIAINI FROM  IVR_SK.V_P_IVR_DATOS A
+    INNER JOIN IVR_SK.V_DESCRIPCION_TASAS B
+ON A.ORDEN = B.ORDEN
+WHERE B.TASAS_ID in('VEF','PEN','BRL','ECS','PAB','UYU'))
+GROUP BY DESCRIPCION,TASAS_ID,VIGENCIAINI
+ORDER BY TASAS_ID]]>
+	</queryString>
+	<field name="DESCRIPCION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VIGENCIAINI" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dolares compra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dolares venta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dolares media" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso compra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso venta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso media" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="108">
+			<image>
+				<reportElement x="0" y="47" width="552" height="61"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Fax\\jasper\\logobanco.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="-35" y="0" width="478" height="35"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Este fax fue producido el día                                                  a la(s)                                 por solicitud de un usuario del sistema de audio respuesta del Banco de la República para indicadores económicos, es de caracter informativo.]]></text>
+			</staticText>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="254" y="0" width="136" height="25"/>
+				<textElement>
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+				<reportElement x="82" y="0" width="196" height="25"/>
+				<textElement>
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="69">
+			<staticText>
+				<reportElement x="145" y="10" width="218" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tasas de cambio - Paises vecinos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="98">
+			<rectangle>
+				<reportElement x="383" y="78" width="60" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-24" y="78" width="108" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="203" y="78" width="60" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="263" y="78" width="60" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="323" y="78" width="60" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="383" y="78" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Venta]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="83" y="25" width="180" height="53"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="263" y="25" width="180" height="53"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-24" y="78" width="108" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moneda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="25" width="180" height="53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moneda por cada dólar estadounidense]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="143" y="78" width="60" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="265" y="25" width="167" height="53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  Pesos colombianos por cada moneda]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="83" y="78" width="60" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="83" y="78" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="78" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Media]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="78" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="78" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="78" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Media]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="10" width="126" height="15"/>
+				<textElement/>
+				<text><![CDATA[Datos vigentes para el día]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+				<reportElement x="203" y="10" width="160" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{VIGENCIAINI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28">
+			<rectangle>
+				<reportElement x="83" y="0" width="60" height="28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="383" y="0" width="60" height="28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="143" y="0" width="60" height="28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="203" y="0" width="60" height="28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="263" y="0" width="60" height="28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="323" y="0" width="60" height="28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-24" y="0" width="107" height="28"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="-22" y="0" width="106" height="28"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00000">
+				<reportElement x="381" y="0" width="60" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{peso venta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00000">
+				<reportElement x="83" y="0" width="60" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dolares compra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00000">
+				<reportElement x="142" y="0" width="60" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dolares media}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00000">
+				<reportElement x="201" y="0" width="60" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dolares venta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00000">
+				<reportElement x="321" y="0" width="60" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{peso media}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00000">
+				<reportElement x="262" y="0" width="60" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{peso compra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="151">
+			<staticText>
+				<reportElement x="-23" y="10" width="41" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fuente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="10" width="343" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[The World Markets Company PLC (WM) (http://www.wmcompany.com).
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-25" y="84" width="319" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota de exclusión de responsabilidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-22" y="84" width="465" height="51"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[                                                               The World Markets Company PLC (WM) en conjunto con Reuters no se hacen responsables por los errores o demoras para proveer la información o cualquier actuación relacionada con ésta, salvo que éstas sean causadas directamente por negligencia de sus empleados.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="123" width="413" height="26"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Por favor tener en cuenta que estos datos requieren autorización previa de  The World ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-22" y="135" width="463" height="16"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Markets Company PLC (WM) para poder publicados  en cualquier medio.
+]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<lastPageFooter>
+		<band height="105">
+			<staticText>
+				<reportElement x="-58" y="24" width="561" height="27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[         Nos permitimos informar que en el vinculo  http://www.banrep.org/es/series-estadisticas/see_tas_cam_paises_vecinos.htm puede consultar la información relacionada.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-58" y="81" width="561" height="24"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[El que ilícitamente sustraiga, oculte, extravíe, destruya, intercepte, controle o impida esta comunicación antes de que llegue a su destinatario, estará sujeto a las sanciones penales correspondientes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-58" y="24" width="439" height="14"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

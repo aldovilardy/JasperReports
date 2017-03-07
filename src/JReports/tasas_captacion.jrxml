@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="53" bottomMargin="40">
+	<style name="Crosstab Data Text" isDefault="false" hAlign="Center"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\cmillamo\\Desktop\\CIE\\ReportesJasper\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT  decode (t.ORDEN,92,1,201,2,203,3,205,4,207,5,95,6,202,7,204,8,206,9,208,10,93,11,94,12) as orden,t.NOMBREDIV,t.VALORESDIV,T.VIGENCIAINI,T.VIGENCIAFIN
+FROM IVR_SK.V_P_IVR_DATOS t
+where ORDEN IN (92,93,94,95,201,202,203,204,205,206,207,208)
+order by orden asc]]>
+	</queryString>
+	<field name="ORDEN" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOMBREDIV" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VALORESDIV" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VIGENCIAINI" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VIGENCIAFIN" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="97">
+			<image>
+				<reportElement x="3" y="36" width="552" height="61"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Fax\\jasper\\logobanco.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="0" width="469" height="24"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<text><![CDATA[Este fax fue producido el día                                                  a la(s)                                 por solicitud de un usuario del sistema de audio respuesta del Banco de la República para indicadores económicos, es de caracter informativo.]]></text>
+			</staticText>
+			<textField pattern="h:mm:ss a">
+				<reportElement x="290" y="0" width="100" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+				<reportElement x="118" y="0" width="160" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="158">
+			<staticText>
+				<reportElement x="3" y="13" width="439" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tasas de interés de captación ]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="122" y="85" width="127" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{VIGENCIAINI}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="122" y="105" width="127" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{VIGENCIAFIN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="85" width="130" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Vigencia del dato desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="105" width="130" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Vigencia del dato hasta:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="366" y="138" width="76" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="366" y="136" width="76" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tasa]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20">
+			<rectangle>
+				<reportElement style="Crosstab Data Text" mode="Transparent" x="1" y="0" width="365" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="366" y="0" width="76" height="20"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="12" y="1" width="354" height="19" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMBREDIV}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="356" y="1" width="75" height="19" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VALORESDIV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="433" y="2" width="23" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="49">
+			<staticText>
+				<reportElement x="3" y="13" width="41" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fuente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="13" width="216" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ Cálculos del Banco de la República (www.banrep.gov.co)]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<lastPageFooter>
+		<band height="97">
+			<staticText>
+				<reportElement x="-58" y="1" width="561" height="57"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[                    Teniendo en cuenta que el Decreto Ley 0019 de 2012, artículo 29, establece que ninguna autoridad podrá exigir la presentación de certificaciones para adelantar procesos o actuaciones ante sus despachos, ya que bastará la consulta que se haga a la web de la entidad que certifica, nos permitimos informar que en el vinculo http://www.banrep.org/es/series-estadisticas/see_tas_inter_capt_sem_men.htm puede consultar la información relacionada.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-58" y="5" width="439" height="14"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aviso legal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-58" y="72" width="561" height="25"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[El que ilícitamente sustraiga, oculte, extravíe, destruya, intercepte, controle o impida esta comunicación antes de que llegue a su destinatario, estará sujeto a las sanciones penales correspondientes.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>
