@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-
-<properties>
-    <entry key="dbName">JasperTest</entry>
-    <entry key="dbPass">calltech</entry>
-    <entry key="dbUrl">jdbc:sqlserver://localhost:1433</entry>
-    <entry key="dbUser">sa</entry>
-    <entry key="dirRep">D:\\Users\\desarrollo1\\Documents\\NetBeansProjects\\JasperReports\\src\\JReports\\</entry>
-    <entry key="driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</entry>
-    <entry key="pdfPath">D:\\Users\\desarrollo1\\Documents\\Banrep\\ExportToPDF\\ReporteGenerado.pdf</entry>
-    <entry key="repName">TRM</entry>
-</properties>
+<root>
+    <properties>
+        <entry key="dbName">JasperTest</entry>
+        <entry key="dbPass">calltech</entry>
+        <entry key="dbUrl">jdbc:sqlserver://localhost:1433</entry>
+        <entry key="dbUser">sa</entry>
+        <entry key="dirRep">D:\\Users\\desarrollo1\\Documents\\Banrep\\reportePrueba\\</entry>
+        <entry key="driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</entry>
+        <entry key="pdfPath">D:\\Users\\desarrollo1\\Documents\\Banrep\\ExportToPDF\\ReporteGenerado.pdf</entry>
+        <entry key="repName">TRM_1</entry>
+        <entry key="repParams">true</entry>
+    </properties>
+    <parameters>    
+        <parameter name="TestParameterString">
+            <type>java.lang.String</type>
+            <value>Hola vengo del XML de Configuración</value>
+        </parameter>
+        <parameter name="TestParameterInteger">
+            <type>java.lang.Integer</type>
+            <value>1986</value>
+        </parameter>
+    </parameters>
+</root>
