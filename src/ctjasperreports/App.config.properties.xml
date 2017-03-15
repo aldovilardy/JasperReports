@@ -2,16 +2,20 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <root>
     <properties>
-        <entry key="dbName">JasperTest</entry>
-        <entry key="dbPass">calltech</entry>
+        <entry key="dbName">NombreBaseDatos</entry>
+        <entry key="dbPass">ContraseñaBaseDatos</entry>
         <entry key="dbUrl">jdbc:sqlserver://localhost:1433</entry>
-        <entry key="dbUser">sa</entry>
-        <entry key="dirRep">D:\\Users\\desarrollo1\\Documents\\Banrep\\reportePrueba\\</entry>
+        <entry key="dbUser">UsuarioBaseDatos</entry>
+        <entry key="dirRep">D:\\Users\\desarrollo1\\Documents\\reportePrueba\\</entry>
+        <!--Driver jdbc para conexión con el DBMS Sql Server, Oracle, etc.-->
         <entry key="driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</entry>
-        <entry key="pdfPath">D:\\Users\\desarrollo1\\Documents\\Banrep\\ExportToPDF\\ReporteGenerado.pdf</entry>
-        <entry key="repName">TRM_1</entry>
+        <!--Ruta donde quiere almacenar el pdf generado-->
+        <entry key="pdfPath">D:\\Users\\desarrollo1\\Documents\\ExportToPDF\\ReporteGenerado.pdf</entry>
+        <entry key="repName">NombreReporteJasper</entry>
+        <!--Define si el reporte tiene o no tiene parametros-->
         <entry key="repParams">true</entry>
     </properties>
+    <!--Declara los parametros que recibira el reporte-->
     <parameters>    
         <parameter name="TestParameterString">
             <type>java.lang.String</type>
@@ -19,7 +23,7 @@
         </parameter>
         <parameter name="TestParameterInteger">
             <type>java.lang.Integer</type>
-            <value>0312</value>
+            <value>80085</value>
         </parameter>
     </parameters>
 </root>
