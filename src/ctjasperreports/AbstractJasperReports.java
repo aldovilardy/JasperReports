@@ -5,7 +5,8 @@
  */
 package ctjasperreports;
 
-import java.sql.Connection;
+import java.sql.*;
+//import java.sql.Connection;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -19,11 +20,15 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.sql.*;
 import java.text.DateFormat;
+import java.text.ParseException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -54,8 +59,8 @@ public abstract class AbstractJasperReports {
     }
 
     public static void createReport(Connection conn, String path, File xmlFile) {
-        Map<String, Object> parameters = new HashMap();
         try {
+            Map<String, Object> parameters = new HashMap();
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("parameter");
@@ -66,10 +71,7 @@ public abstract class AbstractJasperReports {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element eElement = (Element) nNode;
-
-                    System.out.println("Parametro : " + eElement.getAttribute("name"));
-                    System.out.println("Tipo de dato : " + eElement.getElementsByTagName("type").item(0).getTextContent());
-                    System.out.println("valor : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+                    
                     switch (eElement.getElementsByTagName("type").item(0).getTextContent()) {
                         case "java.lang.Boolean":
                             parameters.put(eElement.getAttribute("name"),
@@ -122,16 +124,11 @@ public abstract class AbstractJasperReports {
 
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             report = (JasperReport) JRLoader.loadObjectFromFile(path);
             reportFilled = JasperFillManager.fillReport(report, parameters, conn);
-        } catch (JRException e) {
+        } catch (JRException | IOException | NumberFormatException | ParseException | ParserConfigurationException | DOMException | SAXException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void showViewer() {

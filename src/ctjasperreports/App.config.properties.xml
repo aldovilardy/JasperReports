@@ -15,11 +15,11 @@
     <parameters>    
         <parameter name="TestParameterString">
             <type>java.lang.String</type>
-            <value>Hola vengo del XML de Configuración</value>
+            <value>XML de Parametros</value>
         </parameter>
         <parameter name="TestParameterInteger">
             <type>java.lang.Integer</type>
-            <value>1986</value>
+            <value>0312</value>
         </parameter>
     </parameters>
 </root>

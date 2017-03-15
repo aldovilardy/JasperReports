@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author desarrollo1
+ * @author Aldo Fernando Vilardy Roa
  */
 public class ReportJFrame extends javax.swing.JFrame {
 
